@@ -29,6 +29,17 @@
             background-color: #f7f7f7;
         }
 
+        .bildreihe {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.bildreihe img {
+  width: 400px; 
+  height: auto;
+}
+
         .nav-container {
             max-width: 1000px;
             margin: 0 auto;
@@ -85,7 +96,8 @@
             font-family: 'Hey October', sans-serif;
             font-size: 90px;
             color: hsl(340, 80%, 33%);
-            margin-bottom: 10px;
+            margin-bottom: 0px;
+            padding-bottom: 0;
         
     }
     h5 {
@@ -95,13 +107,18 @@ font-family: 'MuktaMahee-ExtraLight', sans-serif;
             line-height: 1.6;
             max-width: 1300px;
             margin: 0 auto;
+            margin-top: 0px;
+            padding-top: 0;
+            margin-bottom: 10px;
+            padding-bottom: 5;
     }   
     h6 {
         font-family: 'Hey October', sans-serif;
             font-size: 90px;
             color: hsl(340, 80%, 33%);
-            margin-bottom: 10px;
+            margin-bottom: 0px;
     }
+  
     </style>
 </head>
 <body>
@@ -124,26 +141,34 @@ font-family: 'MuktaMahee-ExtraLight', sans-serif;
     <!-- 🔽 Dann der Text -->
     <main>
         <h1>Über uns</h1>
-        <p>
               <!-- Foto -->
      <img src="Fotos/DSC_6439.jpg" alt="Gruppenfoto" width="70%">
             <h2>Wer wir sind</h2>
-        </p>
         <h3>Wir sind d'Accord und damit aber trotzdem „koa Chor“, sondern als Quartett - also zu viert - unterwegs. Zu hören sind wir vorwiegend auf Hochzeiten (übrigens egal ob kirchliche oder freie Trauungen) und Taufen, aber wir freuen uns auch sonst über Anfragen aller Art. Unsere Heimat ist das bayerische Oberland, sprich die Landkreise Miesbach und Bad Tölz. Unterwegs sind wir aber (fast) überall.</h3>
                <h4>Moni</h4>
-        <h5>Sporan 1</h5>
-        <p>
-</p>
-
+        <h5>Sopran 1</h5>
+        <div class="bildreihe">
+  <img src="Fotos/DSC_6286_Kopie.jpg" alt="Bild 1">
+  <img src="Fotos/DSC_6568_dezimiert.png" alt="Bild 2">
+</div>
         <h6>Johanna</h6>
-<h5>Sporan 2</h5>
-<p></p>
+<h5>Sopran 2</h5>
+<div class="bildreihe">
+  <img src="Fotos/DSC_6339_2.jpg" alt="Bild 1">
+  <img src="Fotos/DSC_6595_2_final.jpg" alt="Bild 2">
+</div>
 <h6>Maria</h6>
 <h5>Alt 1</h5>
-<p></p>
+<div class="bildreihe">
+  <img src="Fotos/DSC_6310.jpg" alt="Bild 1">
+  <img src="Fotos/DSC_6581_neu_dezimiert.jpg" alt="Bild 2">
+</div>
 <h6>Sophia</h6>
 <h5>Alt 2</h5>
-<p></p>
+<div class="bildreihe">
+  <img src="Fotos/DSC_6403.jpg" alt="Bild 1">
+  <img src="Fotos/DSC_6617_dezimiert.png" alt="Bild 2">
+</div>
 </p>
     </main>
 
