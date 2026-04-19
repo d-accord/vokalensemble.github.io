@@ -1,259 +1,165 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <title>Vokalensemble d'Accord</title>
-    <style>
-        @font-face {
-    font-family: "MuktaMahee";
-    src: url("Fonts/MuktaMahee-ExtraLight.ttf") format("truetype");
-    font-weight: 200;
-    font-style: normal;
+<meta charset="UTF-8">
+<title>Vokalensemble d'Accord</title>
+
+<style>
+@font-face {
+    font-family: "MuktaMahee";
+    src: url("Fonts/MuktaMahee-ExtraLight.ttf") format("truetype");
+    font-weight: 200;
+    font-style: normal;
 }
 
 @font-face {
-    font-family: "HeyOctober";
-    src: url("Fonts/HeyOctober.ttf") format("truetype");
-    font-weight: normal;
-    font-style: normal;
+    font-family: "HeyOctober";
+    src: url("Fonts/HeyOctober.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
 }
-        body {
-    margin: 0;
-    background-color: #f7f7f7;
-    font-family: "MuktaMahee", sans-serif;
-    font-size: 25px;
-    color: black;
+
+body {
+    margin: 0;
+    background-color: #f7f7f7;
+    font-family: "MuktaMahee", sans-serif;
+    font-size: 25px;
+    color: black;
+}
+
+.banner {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+nav {
+    background-color: #f7f7f7;
+}
+
+.nav-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+}
+
+.nav-container a {
+    color: hsl(340, 80%, 33%);
+    font-size: 20px;
+    font-family: "MuktaMahee";
+    font-weight: bold;
+    text-decoration: none;
+    padding: 15px 50px;
+}
+
+main {
+    padding: 50px;
+    text-align: center;
+}
+
+h1 {
+    font-family: "HeyOctober";
+    font-size: 90px;
+    color: hsl(340, 80%, 33%);
+    margin-bottom: 10px;
+}
+
+h2 {
+    font-family: "MuktaMahee";
+    font-size: 25px;
+    width: 80%;
+    margin: 0 auto 60px auto;
+    line-height: 1.6;
+}
+
+h3 {
+    font-family: "HeyOctober";
+    font-size: 50px;
+    color: hsl(340, 80%, 33%);
+    text-align: left;
+    max-width: 1500px;
+    margin: 40px auto 20px auto;
+}
+
+h4, h5, h6 {
+    font-family: "MuktaMahee";
+    font-size: 25px;
+    text-align: left;
+    max-width: 1500px;
+    margin: 0 auto 60px auto;
 }
 
 .song-list {
-  padding: 0;
-  max-width: 1300px;
-  margin: 5px auto;
-  margin-left: 50px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
+</style>
 
-.song-list li {
-  margin-bottom: 18px;
-  line-height: 1.4;
-}
-
-.song-title {
-  font-style: bold;
-}
-
-.song-artist {
-  display: inline;
-  margin-left: 0 auto;
-  font-style: italic;
-}
-
-        /* Ganz oben: Bannerbild */
-        .banner {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-        /* Menüleiste */
-        nav {
-            background-color: #f7f7f7;
-        }
-
-        .nav-container {
-            max-width: 1000px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: center;
-        }
-
-        .nav-container a {
-            color: hsl(340, 80%, 33%);
-            font-size: 20px;
-            font-family: 'MuktaMahee';
-            font-weight: bold;
-            letter-spacing: 1px;
-            text-decoration: none;
-            padding: 15px 50px;
-            display: inline-block;
-        }
-
-        .nav-container a:hover {
-            background-color: #f7f7f7;
-        }
-
-        /* Hauptinhalt */
-        main {
-            font-family: 'HeyOctober', sans-serif;
-            padding: 50px;
-            text-align: center;
-        }
-
-        h1 {
-            font-family: 'HeyOctober', sans-serif;
-            font-size: 90px;
-            color: hsl(340, 80%, 33%);
-            margin-bottom: 10px;
-        }
-
-        h2 {
-            font-family: 'MuktaMahee', sans-serif;
-            font-size: 25px;
-            color: black;
-            line-height: 1.6;
-            width: 80%;
-            margin: 0 auto;
-            padding: 0 20px;
-            margin-bottom: 60px;
-        }
-        h3 {
-            font-family: 'HeyOctober', sans-serif;
-            font-size: 50px;
-            color: hsl(340, 80%, 33%);
-            line-height: 1.6;
-            max-width: 1500px;
-            margin: 0 auto;
-            text-align: left
-        }
-        h4 {
-            font-family: 'MuktaMahee', sans-serif;
-            font-size: 25px;
-            color: black;
-            line-height: 1.7;
-            max-width: 1500px;
-            margin: 0 auto;
-            text-align: left;
-            margin-bottom: 60px;
-        }
-        h5 {
-            font-family: 'HeyOctober', sans-serif;
-            font-size: 50px;
-            color: hsl(340, 80%, 33%);
-            line-height: 1.6;
-            max-width: 1500px;
-            margin: 0 auto;
-            text-align: left
-        }
-h6 {
-            font-family: 'MuktaMahee', sans-serif;
-            font-size: 25px;
-            color: black;
-            line-height: 1.7;
-            max-width: 1500px;
-            margin: 0 auto;
-            text-align: left;
-            margin-bottom: 60px;
-}
-    </style>
 </head>
+
 <body>
-<!-- 🔼 Bannerbild ganz oben -->
-    <img src="img/banner3.jpg" alt="Banner" class="banner">
 
-    <!-- Menüleiste (horizontal) -->
-     <nav>
-        <div class="nav-container">
-        <a href="index.html">Home</a>
-        <a href="ueber-uns.html">Über uns</a>
-        <a href="repertoire.html">Repertoire</a>
-        <a href="social-media.html">Social Media</a>
-        <a href="kontakt.html">Kontakt</a>
-        </div>
-     </nav>
+<img src="img/banner3.jpg" class="banner">
 
-    <!-- ? Dann der Text -->
+<nav>
+<div class="nav-container">
+<a href="index.html">Home</a>
+<a href="ueber-uns.html">Über uns</a>
+<a href="repertoire.html">Repertoire</a>
+<a href="social-media.html">Social Media</a>
+<a href="kontakt.html">Kontakt</a>
+</div>
+</nav>
 
 <main>
-        <h1>Unser Repertoire</h1>
-        
-            <h2>Hier findest du eine alphabetisch sortierte Übersicht aller Lieder, die wir aktuell im Programm haben.  
-Und weil wir ständig Neues ausprobieren, wird diese Liste laufend erweitert. Ob auf Bayerisch, Hochdeutsch oder Englisch – wir singen, was uns Spaß macht und was bei euch ankommt!  
+
+<h1>Unser Repertoire</h1>
+
+<!-- FIX: KEIN <p> um Überschrift -->
+<h2>
+Hier findest du eine alphabetisch sortierte Übersicht aller Lieder, die wir aktuell im Programm haben.  
+Und weil wir ständig Neues ausprobieren, wird diese Liste laufend erweitert. Ob auf Bayerisch, Hochdeutsch oder Englisch – wir singen, was uns Spaß macht und was bei euch ankommt!  
 Von Austropop über Klassik bis zu Oldies oder alpenländischer Musik ist alles dabei. 
-            
+<br><br>
 Du planst einen besonderen Anlass und hast einen Liedwunsch? Kein Problem - wenn es für uns machbar ist, studieren wir auch neue Stücke für dich ein!
 </h2>
 
+<h3>Hochzeitslieder</h3>
+<h4>
+<ul class="song-list">
+<li>All You Need is Love – The Beatles</li>
+<li>Ave Maria – Franz Schubert</li>
+<li>Can you Feel the Love Tonight – Elton John</li>
+</ul>
+</h4>
 
-            <h3>Hochzeitslieder</h3>
-        <h4><ul class="song-list">
-  <li><span class="song-title">All You Need is Love</span> – <span class="song-artist">The Beatles</span></li>
-  <li><span class="song-title">Ave Maria</span> – <span class="song-artist">Franz Schubert</span></li>
-  <li><span class="song-title">Can you Feel the Love Tonight</span> – <span class="song-artist">Elton John</span></li>
-  <li><span class="song-title">Das wünsch ich Dir</span> – <span class="song-artist">Martin Buchholz (Hochzeitsversion)</span></li>
-  <li><span class="song-title">Der schönste Tag in meinem Leben</span> – <span class="song-artist">Fäaschtbänkler</span></li>
-  <li><span class="song-title">Der Verliebte</span> – <span class="song-artist">Lorenz Maierhofer</span></li>
-  <li><span class="song-title">Ehrenwort</span> – <span class="song-artist">Fäaschtbänkler</span></li>
-  <li><span class="song-title">Felder voller Gold</span> – <span class="song-artist">Sting / Schmidbauer & Kälberer</span></li>
-  <li><span class="song-title">Fields of Gold</span> – <span class="song-artist">Sting</span></li>
-  <li><span class="song-title">Fix You</span> – <span class="song-artist">Coldplay</span></li>
-  <li><span class="song-title">Hallelujah</span> – <span class="song-artist">Leonard Cohen</span></li>
-  <li><span class="song-title">Hallelujah (mit bayerischem Text)</span> – <span class="song-artist">Leonard Cohen (Text nach Stafan Mosinger)</span></li>
-  <li><span class="song-title">I bedank mi</span> – <span class="song-artist">FRIDA.</span></li>
-  <li><span class="song-title">Ins Wasser fällt ein Stein</span> – <span class="song-artist">Kurt Kaiser, C. Fischer</span></li>
-  <li><span class="song-title">I will Follow Him</span> – <span class="song-artist">J. W. Stole, Del Roma, N. Gimbel, A. Altman (Aus „Sister Act“)</span></li>
-  <li><span class="song-title">Ich will Dich lieben</span> – <span class="song-artist">Dietmar Fischenich</span></li>
-  <li><span class="song-title">Jetz bist so ganz nah do (orig.: Weit, weit weg)</span> – <span class="song-artist">Hubert von Goisern</span></li>
-  <li><span class="song-title">Lean on Me</span> – <span class="song-artist">Bill Withers, Gwyn Arch</span></li>
-  <li><span class="song-title">Leiwand</span> – <span class="song-artist">Edmund</span></li>
-  <li><span class="song-title">Loan di o</span> – <span class="song-artist">Bill Withers, Gwyn Arch (Text nach „Die Bayerischen Löwen“ und Eigenkreation)</span></li>
-  <li><span class="song-title">Möge die Straße uns zusammenführen (Irische Segenswünsche)</span> – <span class="song-artist">Markus Pytlik</span></li>
-  <li><span class="song-title">Make you Feel my Love</span> – <span class="song-artist">Adele</span></li>
-  <li><span class="song-title">Oh Happy Day</span> – <span class="song-artist">The Edwin Hawkins Singers</span></li>
-  <li><span class="song-title">Schena Mensch</span> – <span class="song-artist">Folkshilfe</span></li>
-  <li><span class="song-title">Setz di her</span> – <span class="song-artist">Seiler & Speer</span></li>
-  <li><span class="song-title">So liab hob i Di</span> – <span class="song-artist">Andreas Gabalier</span></li>
-  <li><span class="song-title">Stand by Me</span> – <span class="song-artist">Ben E. King</span></li>
-  <li><span class="song-title">Übern See</span> – <span class="song-artist">Lorenz Maierhofer</span></li>
-  <li><span class="song-title">Von guten Mächten</span> – <span class="song-artist">Dietrich Bonhoeffer, Siegfried Fietz</span></li>
-  <li><span class="song-title">Wahre Lieb, o Du, mein Leben</span> – <span class="song-artist">Hermann Derschmidt</span></li>
-  <li><span class="song-title">Weilst a Herz host wie a Bergwerk</span> – <span class="song-artist">Rainhard Fendrich</span></li>
-  <li><span class="song-title">Zam oid wearn</span> – <span class="song-artist">Edmund</span></li>
+<h3>Tauflieder</h3>
+<h5>
+<ul class="song-list">
+<li>Das wünsch ich Dir – Martin Buchholz</li>
+<li>Engel – Andreas Gabalier</li>
+</ul>
+</h5>
 
-</ul></h4>
-        
+<h3>Geistliche und liturgische Lieder</h3>
+<h6>
+<ul class="song-list">
+<li>Ave Maria – Franz Schubert</li>
+<li>Ubi Caritas – Ola Gjeilo</li>
+</ul>
+</h6>
 
-        <h5>Tauflieder</h5>
-<h6><ul class="song-list">
-  <li><span class="song-title">Das wünsch ich Dir</span> – <span class="song-artist">Martin Buchholz</span></li>
-  <li><span class="song-title">Engel</span> – <span class="song-artist">Andreas Gabalier</span></li>
-  <li><span class="song-title">Hallelujah</span> – <span class="song-artist">Leonard Cohen</span></li>
-  <li><span class="song-title">Hallelujah auf Bayerisch</span> – <span class="song-artist">Leonard Cohen (Text: „Bettina & Veri singen“)</span></li>
-  <li><span class="song-title">Ins Wasser fällt ein Stein</span> – <span class="song-artist">Kurt Kaiser, C. Fischer</span></li>
-  <li><span class="song-title">Möge die Straße uns zusammenführen (Irische Segenswünsche)</span> – <span class="song-artist">Markus Pytlik</span></li>
-  <li><span class="song-title">Mögen Engel Dich begleiten</span> – <span class="song-artist">Jürgen Grote</span></li>
-  <li><span class="song-title">So liab hob i di</span> – <span class="song-artist">Andreas Gabalier</span></li>
-  <li><span class="song-title">Vergiss es nie (Du bist Du)</span> – <span class="song-artist">Jürgen Werth</span></li>
-  <li><span class="song-title">Von guten Mächten</span> – <span class="song-artist">Dietrich Bonhoeffer, Siegfried Fietz</span></li>
-  <li><span class="song-title">Wir wünschen Dir Liebe</span> – <span class="song-artist">Sunny Dale</span></li>
-</ul></h6>
+<h3>Weihnachtslieder</h3>
+<h6>
+<ul class="song-list">
+<li>Maria durch ein Dornwald ging – traditionell</li>
+<li>Tochter Zion – Händel</li>
+</ul>
+</h6>
 
-<h5>Geistliche und liturgische Lieder</h5>
-<h6><ul class="song-list">
-  <li><span class="song-title">Ave Maria</span> – <span class="song-artist">Franz Schubert</span></li>
-  <li><span class="song-title">Du lässt den Tag, o Gott, nun enden</span> – <span class="song-artist">Clement Cotterill Scholefield, Raymund Weber</span></li>
-  <li><span class="song-title">Gloria, Ehre sei Gott</span> – <span class="song-artist">Kathi Stimmer-Salzeder</span></li>
-  <li><span class="song-title">Großer Gott, wir loben Dich</span> – <span class="song-artist">nach Karl Norbert Schmid</span></li>
-  <li><span class="song-title">Heilig ist der Herr</span> – <span class="song-artist">Franz Schubert</span></li>
-  <li><span class="song-title">Heilig, heilig, heilig</span> – <span class="song-artist">Kathi Stimmer-Salzeder</span></li>
-  <li><span class="song-title">Herr, erbarme Dich</span> – <span class="song-artist">P. Janssens, A. Albrecht</span></li>
-  <li><span class="song-title">Kyrie, kyrie eléison</span> – <span class="song-artist">Jacques Berthier</span></li>
-  <li><span class="song-title">Mater Dei</span> – <span class="song-artist">Lorenz Maierhofer</span></li>
-  <li><span class="song-title">Möge die Straße uns zusammenführen (Irische Segenswünsche)</span> – <span class="song-artist">Markus Pytlik</span></li>
-  <li><span class="song-title">Ubi Caritas</span> – <span class="song-artist">Ola Gjeilo</span></li>
-  <li><span class="song-title">Trag mi, Wind</span> – <span class="song-artist">Brigitte Hubmann, Christian Dreo</span></li>
-  <li><span class="song-title">Von guten Mächten</span> – <span class="song-artist">Dietrich Bonhoeffer, Siegfried Fietz</span></li>
-  <li><span class="song-title">Wir sind hier zusammen in Jesu Namen</span> – <span class="song-artist">Pam Mark Hall</span></li>
-  <li><span class="song-title">Würdig das Lamm</span> – <span class="song-artist">Beat Schmid</span></li>
-</ul></h6>
-
-<h5>Weihnachtslieder</h5>
-<h6><ul class="song-list">
-  <li><span class="song-title">Es naht ein Licht</span> – <span class="song-artist">Lorenz Maierhofer</span></li>
-  <li><span class="song-title">Hör in den Klang der Stille</span> – <span class="song-artist">Lorenz Maierhofer</span></li>
-  <li><span class="song-title">Maria durch ein' Dornwald ging</span> – <span class="song-artist">Verfasser unbekannt</span></li>
-  <li><span class="song-title">Tochter Zion, freue Dich</span> – <span class="song-artist">G. F. Händel, F. H. Ranke (Arr.: Michael Schütz)</span></li>
-  <li><span class="song-title">Werst mei Liacht ume sei (Wo is denn im Schnee no a Wegerl zu dir)</span> – <span class="song-artist">Günther Mittergradnegger, Gerhard Glawischnig</span></li>
-</ul></h6>
-
-    </main>
+</main>
 
 </body>
 </html>
