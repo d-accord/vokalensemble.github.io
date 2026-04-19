@@ -1,119 +1,167 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-<meta charset="UTF-8">
-<title>Vokalensemble d'Accord</title>
-
-<style>
-@font-face {
-    font-family: "MuktaMahee";
-    src: url("Fonts/MuktaMahee-ExtraLight.ttf") format("truetype");
-    font-weight: 200;
-    font-style: normal;
+    <meta charset="UTF-8">
+    <title>Vokalensemble d'Accord</title>
+    <style>
+        @font-face {
+    font-family: "MuktaMahee";
+    src: url("Fonts/MuktaMahee-ExtraLight.ttf") format("truetype");
+    font-weight: 200;
+    font-style: normal;
 }
 
 @font-face {
-    font-family: "HeyOctober";
-    src: url("Fonts/HeyOctober.ttf") format("truetype");
-    font-weight: normal;
-    font-style: normal;
+    font-family: "HeyOctober";
+    src: url("Fonts/HeyOctober.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+        body {
+    margin: 0;
+    background-color: #f7f7f7;
+    font-family: "MuktaMahee", sans-serif;
+    font-size: 25px;
+    color: black;
 }
 
-/* BASIS */
-body {
-    margin: 0;
-    background-color: #f7f7f7;
-    font-family: "MuktaMahee", sans-serif;
-    font-size: 25px;
-    color: black;
-}
-
-/* BANNER */
-.banner {
-    width: 100%;
-    height: auto;
-    display: block;
-}
-
-/* NAV */
-nav {
-    background-color: #f7f7f7;
-}
-
-.nav-container {
-    max-width: 1000px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: center;
-}
-
-.nav-container a {
-    color: hsl(340, 80%, 33%);
-    font-size: 20px;
-    font-family: "MuktaMahee";
-    font-weight: bold;
-    letter-spacing: 1px;
-    text-decoration: none;
-    padding: 15px 50px;
-}
-
-/* HEADINGS */
-h1 {
-    font-family: "HeyOctober";
-    font-size: 90px;
-    color: hsl(340, 80%, 33%);
-    text-align: center;
-    margin-bottom: 10px;
-}
-
-h2 {
-    font-family: "MuktaMahee";
-    font-size: 25px;
-    text-align: center;
-    width: 80%;
-    margin: 0 auto 60px auto;
-}
-
-h3, h5 {
-    font-family: "HeyOctober";
-    font-size: 50px;
-    color: hsl(340, 80%, 33%);
-    text-align: left;
-    max-width: 1500px;
-    margin: 40px auto 20px auto;
-}
-
-h4, h6 {
-    font-family: "MuktaMahee";
-    font-size: 25px;
-    text-align: left;
-    max-width: 1500px;
-    margin: 0 auto 60px auto;
-}
-
-/* LISTEN */
 .song-list {
-    padding: 0;
-    max-width: 1300px;
-    margin: 0 auto;
-    list-style: none;
+  padding: 0;
+  max-width: 1300px;
+  margin: 5px auto;
+  margin-left: 50px;
 }
 
 .song-list li {
-    margin-bottom: 18px;
-    line-height: 1.4;
+  margin-bottom: 18px;
+  line-height: 1.4;
 }
 
 .song-title {
-    font-weight: bold;
+  font-style: bold;
 }
 
 .song-artist {
-    font-style: italic;
+  display: inline;
+  margin-left: 0 auto;
+  font-style: italic;
 }
-</style>
 
+        /* Ganz oben: Bannerbild */
+        .banner {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        /* Menüleiste */
+        nav {
+            background-color: #f7f7f7;
+        }
+
+        .nav-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+        }
+
+        .nav-container a {
+            color: hsl(340, 80%, 33%);
+            font-size: 20px;
+            font-family: 'MuktaMahee';
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-decoration: none;
+            padding: 15px 50px;
+            display: inline-block;
+        }
+
+        .nav-container a:hover {
+            background-color: #f7f7f7;
+        }
+
+        /* Hauptinhalt */
+        main {
+            font-family: 'HeyOctober', sans-serif;
+            padding: 50px;
+            text-align: center;
+        }
+
+        h1 {
+            font-family: 'HeyOctober', sans-serif;
+            font-size: 90px;
+            color: hsl(340, 80%, 33%);
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            font-family: 'MuktaMahee', sans-serif;
+            font-size: 25px;
+            color: black;
+            line-height: 1.6;
+            width: 80%;
+            margin: 0 auto;
+            padding: 0 20px;
+            margin-bottom: 60px;
+        }
+        h3 {
+            font-family: 'HeyOctober', sans-serif;
+            font-size: 50px;
+            color: hsl(340, 80%, 33%);
+            line-height: 1.6;
+            max-width: 1500px;
+            margin: 0 auto;
+            text-align: left
+        }
+        h4 {
+            font-family: 'MuktaMahee', sans-serif;
+            font-size: 25px;
+            color: black;
+            line-height: 1.7;
+            max-width: 1500px;
+            margin: 0 auto;
+            text-align: left;
+            margin-bottom: 60px;
+        }
+        h5 {
+            font-family: 'HeyOctober', sans-serif;
+            font-size: 50px;
+            color: hsl(340, 80%, 33%);
+            line-height: 1.6;
+            max-width: 1500px;
+            margin: 0 auto;
+            text-align: left
+        }
+h6 {
+            font-family: 'MuktaMahee', sans-serif;
+            font-size: 25px;
+            color: black;
+            line-height: 1.7;
+            max-width: 1500px;
+            margin: 0 auto;
+            text-align: left;
+            margin-bottom: 60px;
+}
+    </style>
 </head>
+<body>
+    
+    <!-- ? Bannerbild ganz oben -->
+    <img src="img/banner3.jpg" alt="Banner" class="banner">
+
+    <!-- Menüleiste (horizontal) -->
+     <nav>
+        <div class="nav-container">
+        <a href="index.html">Home</a>
+        <a href="ueber-uns.html">Über uns</a>
+        <a href="repertoire.html">Repertoire</a>
+        <a href="social-media.html">Social Media</a>
+        <a href="kontakt.html">Kontakt</a>
+        </div>
+     </nav>
+
+    <!-- ? Dann der Text -->
+
 <main>
         <h1>Unser Repertoire</h1>
         
