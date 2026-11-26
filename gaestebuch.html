@@ -1,0 +1,386 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Gästebuch – d'Accord</title>
+
+    <style>
+        @font-face {
+            font-family: 'MuktaMahee-ExtraLight';
+            src: url('Fonts/MuktaMahee-ExtraLight.ttf') format('truetype');
+        }
+
+        @font-face {
+            font-family: 'HeyOctober';
+            src: url('Fonts/HeyOctober.ttf') format('truetype');
+        }
+
+        body {
+            margin: 0;
+            background-color: #f7f7f7;
+            font-family: 'MuktaMahee-ExtraLight', sans-serif;
+            color: #333;
+        }
+
+        .banner {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        nav {
+            background-color: #f7f7f7;
+        }
+
+        .nav-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-container a {
+            color: hsl(340, 80%, 33%);
+            font-size: 20px;
+            font-family: 'MuktaMahee-ExtraLight';
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-decoration: none;
+            padding: 15px 25px;
+            display: inline-block;
+        }
+
+        .nav-container a:hover {
+            background-color: #eee;
+        }
+
+        main {
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 35px 25px 70px;
+        }
+
+        h1 {
+            font-family: 'HeyOctober', sans-serif;
+            font-size: 72px;
+            font-weight: normal;
+            color: hsl(340, 80%, 33%);
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .intro {
+            text-align: center;
+            font-size: 21px;
+            margin-bottom: 45px;
+        }
+
+        .entry {
+            padding: 22px 5px;
+            border-bottom: 1px solid #d8d8d8;
+        }
+
+        .entry:first-child {
+            border-top: 1px solid #d8d8d8;
+        }
+
+        .entry-name {
+            font-size: 23px;
+            font-weight: bold;
+            color: hsl(340, 80%, 33%);
+        }
+
+        .entry-date {
+            font-size: 15px;
+            color: #888;
+            margin: 3px 0 12px;
+        }
+
+        .entry-message {
+            font-size: 19px;
+            line-height: 1.7;
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
+        }
+
+        #entries-status {
+            text-align: center;
+            font-size: 18px;
+            padding: 20px 0;
+        }
+
+        .form-area {
+            margin-top: 65px;
+            padding-top: 30px;
+            border-top: 1px solid #d8d8d8;
+        }
+
+        h2 {
+            font-family: 'HeyOctober', sans-serif;
+            font-size: 42px;
+            font-weight: normal;
+            color: hsl(340, 80%, 33%);
+            text-align: center;
+        }
+
+        .form-area p {
+            text-align: center;
+            font-size: 18px;
+        }
+
+        label {
+            display: block;
+            margin: 18px 0 6px;
+            font-size: 19px;
+        }
+
+        input, textarea {
+            box-sizing: border-box;
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            background: white;
+            font-family: 'MuktaMahee-ExtraLight', sans-serif;
+            font-size: 18px;
+        }
+
+        textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        button {
+            display: block;
+            margin: 25px auto 0;
+            padding: 12px 30px;
+            border: none;
+            background: hsl(340, 80%, 33%);
+            color: white;
+            font-family: 'MuktaMahee-ExtraLight', sans-serif;
+            font-size: 19px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            opacity: 0.85;
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: wait;
+        }
+
+        #form-status {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 18px;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            font-size: 14px;
+        }
+
+        footer a {
+            color: hsl(340, 80%, 33%);
+            text-decoration: none;
+        }
+
+        @media (max-width: 600px) {
+            .nav-container a {
+                padding: 10px 12px;
+                font-size: 17px;
+            }
+
+            h1 {
+                font-size: 52px;
+            }
+
+            h2 {
+                font-size: 34px;
+            }
+
+            main {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<img src="img/banner3.jpg" alt="d'Accord Banner" class="banner">
+
+<nav>
+    <div class="nav-container">
+        <a href="index.html">Home</a>
+        <a href="ueber-uns.html">Über uns</a>
+        <a href="repertoire.html">Repertoire</a>
+        <a href="social-media.html">Social Media</a>
+        <a href="kontakt.html">Kontakt</a>
+        <a href="gaestebuch.html">Gästebuch</a>
+    </div>
+</nav>
+
+<main>
+    <h1>Gästebuch</h1>
+
+    <p class="intro">
+        Wir freuen uns über eure Grüße, Erinnerungen und lieben Worte!
+    </p>
+
+    <div id="entries-status">Einträge werden geladen …</div>
+    <div id="entries"></div>
+
+    <section class="form-area">
+        <h2>Eintrag hinterlassen</h2>
+
+        <p>
+            Dein Eintrag wird nach einer kurzen Prüfung veröffentlicht.
+        </p>
+
+        <form id="guestbook-form">
+            <label for="name">Dein Name</label>
+            <input
+                type="text"
+                id="name"
+                maxlength="80"
+                required
+                autocomplete="name"
+            >
+
+            <label for="message">Deine Nachricht</label>
+            <textarea
+                id="message"
+                maxlength="2000"
+                required
+            ></textarea>
+
+            <button type="submit" id="submit-button">
+                Eintrag absenden
+            </button>
+        </form>
+
+        <div id="form-status" role="status"></div>
+    </section>
+</main>
+
+<footer>
+    <a href="impressum.html">Impressum</a>
+</footer>
+
+<script type="module">
+    import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+
+    const SUPABASE_URL = "https://yhkjmokkesconlbzjgdc.supabase.co";
+    const SUPABASE_KEY = "sb_publishable_sh0tg2HwMWARBH39LCpNUA_hMBzp7dm";
+
+    const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    const entriesBox = document.getElementById("entries");
+    const entriesStatus = document.getElementById("entries-status");
+    const formStatus = document.getElementById("form-status");
+    const form = document.getElementById("guestbook-form");
+    const submitButton = document.getElementById("submit-button");
+
+    async function loadEntries() {
+        try {
+            const { data, error } = await supabase
+                .from("guestbook_entries")
+                .select("name, message, created_at")
+                .eq("approved", true)
+                .order("created_at", { ascending: false });
+
+            if (error) throw error;
+
+            entriesBox.replaceChildren();
+
+            if (!data || data.length === 0) {
+                entriesStatus.textContent =
+                    "Noch gibt es keine Einträge. Sei gerne der oder die Erste!";
+                return;
+            }
+
+            entriesStatus.textContent = "";
+
+            data.forEach(entry => {
+                const article = document.createElement("article");
+                article.className = "entry";
+
+                const name = document.createElement("div");
+                name.className = "entry-name";
+                name.textContent = entry.name;
+
+                const date = document.createElement("div");
+                date.className = "entry-date";
+                date.textContent = new Date(entry.created_at)
+                    .toLocaleDateString("de-DE");
+
+                const message = document.createElement("div");
+                message.className = "entry-message";
+                message.textContent = entry.message;
+
+                article.append(name, date, message);
+                entriesBox.append(article);
+            });
+
+        } catch (error) {
+            entriesStatus.textContent =
+                "Die Einträge konnten gerade nicht geladen werden.";
+            console.error(error);
+        }
+    }
+
+    form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        submitButton.disabled = true;
+        formStatus.textContent = "Dein Eintrag wird gesendet …";
+
+        const name = document.getElementById("name").value.trim();
+        const message = document.getElementById("message").value.trim();
+
+        try {
+            const response = await fetch(
+                SUPABASE_URL + "/functions/v1/submit-guestbook",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "apikey": SUPABASE_KEY,
+                        "Authorization": "Bearer " + SUPABASE_KEY
+                    },
+                    body: JSON.stringify({ name, message })
+                }
+            );
+
+            const result = await response.json();
+
+            if (!response.ok) {
+                throw new Error(result.error || "Senden fehlgeschlagen.");
+            }
+
+            form.reset();
+            formStatus.textContent =
+                "Vielen Dank! Dein Eintrag wurde übermittelt und wird nach Prüfung veröffentlicht.";
+
+        } catch (error) {
+            formStatus.textContent =
+                "Das hat leider nicht geklappt. Bitte versuche es später erneut.";
+            console.error(error);
+        } finally {
+            submitButton.disabled = false;
+        }
+    });
+
+    loadEntries();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,260 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gästebuch – Moderation | d'Accord</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 40px 20px;
+      background: #f7f7f7;
+      color: #333;
+      font-family: "Mukta Mahee", Arial, sans-serif;
+    }
+    main {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    h1 {
+      color: hsl(340, 80%, 33%);
+      font-weight: normal;
+      text-align: center;
+    }
+    .box, .entry {
+      background: white;
+      padding: 22px;
+      margin: 18px 0;
+      border: 1px solid #e5e5e5;
+      border-radius: 4px;
+    }
+    label {
+      display: block;
+      margin: 14px 0 5px;
+    }
+    input {
+      box-sizing: border-box;
+      width: 100%;
+      padding: 11px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      font: inherit;
+    }
+    button {
+      padding: 10px 18px;
+      margin: 12px 8px 0 0;
+      border: 0;
+      border-radius: 3px;
+      background: hsl(340, 80%, 33%);
+      color: white;
+      font: inherit;
+      cursor: pointer;
+    }
+    button.reject {
+      background: #666;
+    }
+    button:disabled {
+      opacity: 0.5;
+      cursor: wait;
+    }
+    .muted {
+      color: #777;
+      font-size: 0.9em;
+    }
+    .message {
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      line-height: 1.6;
+    }
+    #status {
+      margin: 15px 0;
+      color: hsl(340, 80%, 33%);
+    }
+    [hidden] {
+      display: none !important;
+    }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Gästebuch – Moderation</h1>
+
+  <div id="login" class="box">
+    <p>Bitte melde dich an, um neue Gästebucheinträge zu prüfen.</p>
+    <form id="login-form">
+      <label for="email">E-Mail-Adresse</label>
+      <input id="email" type="email" required autocomplete="username">
+
+      <label for="password">Passwort</label>
+      <input id="password" type="password" required autocomplete="current-password">
+
+      <button type="submit">Anmelden</button>
+    </form>
+  </div>
+
+  <div id="moderation" hidden>
+    <div class="box">
+      <p>Hier kannst du neue Gästebucheinträge freigeben oder ablehnen.</p>
+      <button id="refresh">Liste aktualisieren</button>
+      <button id="logout" class="reject">Abmelden</button>
+    </div>
+    <div id="entries"></div>
+  </div>
+
+  <p id="status" role="status"></p>
+</main>
+
+<script type="module">
+  import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+
+  const SUPABASE_URL = "https://yhkjmokkesconlbzjgdc.supabase.co";
+  const SUPABASE_KEY = "sb_publishable_sh0tg2HwMWARBH39LCpNUA_hMBzp7dm";
+  const FUNCTION_URL = SUPABASE_URL + "/functions/v1/moderate-guestbook";
+
+  const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+
+  const loginPanel = document.getElementById("login");
+  const moderationPanel = document.getElementById("moderation");
+  const statusBox = document.getElementById("status");
+  const entriesBox = document.getElementById("entries");
+
+  function status(message) {
+    statusBox.textContent = message;
+  }
+
+  async function moderationRequest(body) {
+    const { data: sessionData } = await supabase.auth.getSession();
+    const token = sessionData.session?.access_token;
+
+    if (!token) throw new Error("Bitte melde dich erneut an.");
+
+    const response = await fetch(FUNCTION_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "apikey": SUPABASE_KEY,
+        "Authorization": "Bearer " + token
+      },
+      body: JSON.stringify(body)
+    });
+
+    const result = await response.json();
+
+    if (!response.ok) {
+      throw new Error(result.error || "Die Anfrage ist fehlgeschlagen.");
+    }
+
+    return result;
+  }
+
+  function showModeration() {
+    loginPanel.hidden = true;
+    moderationPanel.hidden = false;
+  }
+
+  function showLogin() {
+    loginPanel.hidden = false;
+    moderationPanel.hidden = true;
+    entriesBox.replaceChildren();
+  }
+
+  async function loadEntries() {
+    status("Einträge werden geladen …");
+    entriesBox.replaceChildren();
+
+    try {
+      const result = await moderationRequest({ action: "list" });
+
+      if (!result.entries || result.entries.length === 0) {
+        status("Im Moment gibt es keine offenen Gästebucheinträge.");
+        return;
+      }
+
+      status(result.entries.length + " offene Einträge:");
+
+      for (const entry of result.entries) {
+        const card = document.createElement("article");
+        card.className = "entry";
+
+        const name = document.createElement("strong");
+        name.textContent = entry.name;
+
+        const date = document.createElement("p");
+        date.className = "muted";
+        date.textContent = new Date(entry.created_at).toLocaleString("de-DE");
+
+        const message = document.createElement("p");
+        message.className = "message";
+        message.textContent = entry.message;
+
+        const approve = document.createElement("button");
+        approve.textContent = "Freigeben";
+        approve.addEventListener("click", () => handleEntry(entry.id, "approve"));
+
+        const reject = document.createElement("button");
+        reject.textContent = "Ablehnen";
+        reject.className = "reject";
+        reject.addEventListener("click", () => handleEntry(entry.id, "reject"));
+
+        card.append(name, date, message, approve, reject);
+        entriesBox.append(card);
+      }
+    } catch (error) {
+      status(error.message);
+    }
+  }
+
+  async function handleEntry(id, action) {
+    const question = action === "approve"
+      ? "Diesen Eintrag wirklich freigeben?"
+      : "Diesen Eintrag wirklich ablehnen und löschen?";
+
+    if (!confirm(question)) return;
+
+    status("Einen Moment bitte …");
+
+    try {
+      await moderationRequest({ action, id });
+      status(action === "approve" ? "Eintrag freigegeben." : "Eintrag abgelehnt.");
+      await loadEntries();
+    } catch (error) {
+      status(error.message);
+    }
+  }
+
+  document.getElementById("login-form").addEventListener("submit", async (event) => {
+    event.preventDefault();
+    status("Anmeldung läuft …");
+
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    const { error } = await supabase.auth.signInWithPassword({ email, password });
+
+    if (error) {
+      status("Anmeldung nicht möglich: " + error.message);
+      return;
+    }
+
+    showModeration();
+    await loadEntries();
+  });
+
+  document.getElementById("refresh").addEventListener("click", loadEntries);
+
+  document.getElementById("logout").addEventListener("click", async () => {
+    await supabase.auth.signOut();
+    showLogin();
+    status("Du bist abgemeldet.");
+  });
+
+  const { data: initialSession } = await supabase.auth.getSession();
+
+  if (initialSession.session) {
+    showModeration();
+    await loadEntries();
+  }
+</script>
+</body>
+</html>
