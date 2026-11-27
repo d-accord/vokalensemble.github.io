@@ -111,6 +111,28 @@
             font-size: 18px;
             padding: 20px 0;
         }
+        #pagination {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 30px;
+}
+
+.page-button {
+    display: inline-block;
+    margin: 0;
+    padding: 8px 14px;
+    background: transparent;
+    color: hsl(340, 80%, 33%);
+    border: 1px solid hsl(340, 80%, 33%);
+}
+
+.page-button:disabled {
+    background: hsl(340, 80%, 33%);
+    color: white;
+    opacity: 1;
+    cursor: default;
+}
 
         .form-area {
             margin-top: 65px;
@@ -235,8 +257,7 @@
         Wir freuen uns über eure Grüße, Erinnerungen und lieben Worte!
     </p>
 
-    <div id="entries-status">Einträge werden geladen …</div>
-    <div id="entries"></div>
+    
 
     <section class="form-area">
         <h2>Eintrag hinterlassen</h2>
@@ -269,11 +290,16 @@
 
         <div id="form-status" role="status"></div>
     </section>
+    <h2>Bisherige Einträge</h2>
+<div id="entries-status">Einträge werden geladen …</div>
+<div id="entries"></div>
+<div id="pagination"></div>
 </main>
 
 <footer>
     <a href="impressum.html">Impressum</a>
 </footer>
+
 
 <script type="module">
     import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
@@ -285,9 +311,67 @@
 
     const entriesBox = document.getElementById("entries");
     const entriesStatus = document.getElementById("entries-status");
+    const paginationBox = document.getElementById("pagination");
+
+    let allEntries = [];
+    let currentPage = 1;
+    const entriesPerPage = 10;
+
     const formStatus = document.getElementById("form-status");
     const form = document.getElementById("guestbook-form");
     const submitButton = document.getElementById("submit-button");
+
+    function renderEntries() {
+        entriesBox.replaceChildren();
+        paginationBox.replaceChildren();
+
+        if (allEntries.length === 0) {
+            entriesStatus.textContent =
+                "Noch gibt es keine Einträge. Sei gerne der oder die Erste!";
+            return;
+        }
+
+        entriesStatus.textContent = "";
+
+        const totalPages = Math.ceil(allEntries.length / entriesPerPage);
+        const start = (currentPage - 1) * entriesPerPage;
+        const pageEntries = allEntries.slice(start, start + entriesPerPage);
+
+        pageEntries.forEach(entry => {
+            const article = document.createElement("article");
+            article.className = "entry";
+
+            const name = document.createElement("div");
+            name.className = "entry-name";
+            name.textContent = entry.name;
+
+            const date = document.createElement("div");
+            date.className = "entry-date";
+            date.textContent = new Date(entry.created_at)
+                .toLocaleDateString("de-DE");
+
+            const message = document.createElement("div");
+            message.className = "entry-message";
+            message.textContent = entry.message;
+
+            article.append(name, date, message);
+            entriesBox.append(article);
+        });
+
+        for (let page = 1; page <= totalPages; page++) {
+            const button = document.createElement("button");
+            button.className = "page-button";
+            button.textContent = page;
+            button.disabled = page === currentPage;
+
+            button.addEventListener("click", () => {
+                currentPage = page;
+                renderEntries();
+            });
+
+            paginationBox.append(button);
+        }
+    }
 
     async function loadEntries() {
         try {
@@ -299,36 +383,9 @@
 
             if (error) throw error;
 
-            entriesBox.replaceChildren();
-
-            if (!data || data.length === 0) {
-                entriesStatus.textContent =
-                    "Noch gibt es keine Einträge. Sei gerne der oder die Erste!";
-                return;
-            }
-
-            entriesStatus.textContent = "";
-
-            data.forEach(entry => {
-                const article = document.createElement("article");
-                article.className = "entry";
-
-                const name = document.createElement("div");
-                name.className = "entry-name";
-                name.textContent = entry.name;
-
-                const date = document.createElement("div");
-                date.className = "entry-date";
-                date.textContent = new Date(entry.created_at)
-                    .toLocaleDateString("de-DE");
-
-                const message = document.createElement("div");
-                message.className = "entry-message";
-                message.textContent = entry.message;
-
-                article.append(name, date, message);
-                entriesBox.append(article);
-            });
+            allEntries = data || [];
+            currentPage = 1;
+            renderEntries();
 
         } catch (error) {
             entriesStatus.textContent =
@@ -381,6 +438,7 @@
 
     loadEntries();
 </script>
+
 
 </body>
 </html>
